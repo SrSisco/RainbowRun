@@ -62,9 +62,9 @@ rainbow_run:
   swapping_players_event: true
   # Health event difficulty (0-100), 0 = 100% 100 = 0%
   swapping_players_probability: 95
-  # Spawning grenade/flash/018 event is enabled?
+  # Spawning grenade event is enabled?
   grenade_event: true
-  # Spawning greande/flash/018 event difficulty (0-100), 0 = 100% 100 = 0%
+  # Spawning greande event difficulty (0-100), 0 = 100% 100 = 0%
   grenade_probability: 95
   # Spawning dead players event is enabled?
   spawning_players_event: true
