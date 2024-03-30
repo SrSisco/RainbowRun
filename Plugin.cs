@@ -24,8 +24,8 @@
             Player.InteractingElevator += _handlers.OnInteractingElevator;
             Player.InteractingLocker += _handlers.OnInteractingLocker;
             Player.TriggeringTesla += _handlers.OnTriggeringTesla;
-            Player.DamagingShootingTarget += _handlers.OnDamagingShootingTarget;
-            
+            Player.DroppingItem += _handlers.OnDroppingItem;
+            Server.RoundEnded += _handlers.OnRoundEnded;
             
             Log.Info("RainbowRun has been enabled");
             base.OnEnabled();
@@ -40,7 +40,8 @@
             Player.InteractingElevator -= _handlers.OnInteractingElevator;
             Player.InteractingLocker -= _handlers.OnInteractingLocker;
             Player.TriggeringTesla -= _handlers.OnTriggeringTesla;
-            Player.DamagingShootingTarget -= _handlers.OnDamagingShootingTarget;
+            Player.DroppingItem -= _handlers.OnDroppingItem;
+            Server.RoundEnded -= _handlers.OnRoundEnded;
             _handlers = null;
             Instance = null;
             Log.Info("RainbowRun has been disabled");
