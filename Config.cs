@@ -99,10 +99,10 @@ namespace RainbowRun
         
         
         
-        [Description("Spawning grenade/flash/018 event is enabled?")]
+        [Description("Spawning grenade event is enabled?")]
         public bool GrenadeEvent { get; set; } = true;
         
-        [Description("Spawning greande/flash/018 event difficulty (0-100), 0 = 100% 100 = 0%")]
+        [Description("Spawning greandeevent difficulty (0-100), 0 = 100% 100 = 0%")]
         public int GrenadeProbability { get; set; } = 95;
         
         

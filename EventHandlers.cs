@@ -36,11 +36,12 @@ namespace RainbowRun
                 && Random.Range(0,100) > RainbowRun.Instance.Config.ReseizeProbability)
             {
                 var fac = RainbowRun.Instance.Config.ReseizeFactor;
-                var xdiff = Random.Range(fac * -1, fac);
-                var ydiff = Random.Range(fac * -1, fac);
-                var zdiff = Random.Range(fac * -1, fac);
-
-                pl.Scale.Set(pl.Scale.x + xdiff, pl.Scale.y + ydiff, pl.Scale.z + zdiff);
+                var negfac = fac * -1;
+                var xdiff = Random.Range(negfac, fac) + pl.Scale.x;
+                var ydiff = Random.Range(negfac, fac) + pl.Scale.y;
+                var zdiff = Random.Range(negfac, fac) + pl.Scale.z;
+                
+                pl.Scale.Set(xdiff, ydiff, zdiff);
             }
 
 
@@ -49,7 +50,8 @@ namespace RainbowRun
                 && Random.Range(0, 100) > RainbowRun.Instance.Config.HealthProbability)
             {
                 var fac = RainbowRun.Instance.Config.HealthFactor;
-                var healthdiff = Random.Range(-1*fac, fac);
+                var negfac = fac * -1;
+                var healthdiff = Random.Range(negfac, fac);
                 
                 pl.Health += healthdiff;
             }
@@ -78,25 +80,8 @@ namespace RainbowRun
             if (RainbowRun.Instance.Config.GrenadeEvent 
                 && Random.Range(0, 100) > RainbowRun.Instance.Config.GrenadeProbability)
             {
-                var grenadetype = Random.Range(0, 2);
-                
-                switch (grenadetype)
-                {
-                    case 0:
-                        ExplosiveGrenade grenade1 = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE);
-                        ExplosionGrenadeProjectile activeGrenade1 = grenade1.SpawnActive(pl.Position);
-                        break;
-                    case 1:
-                        ExplosiveGrenade grenade2 = (ExplosiveGrenade)Item.Create(ItemType.GrenadeFlash);
-                        ExplosionGrenadeProjectile activeGrenade2 = grenade2.SpawnActive(pl.Position);
-                        break;
-                    case 2:
-                        ExplosiveGrenade grenade3 = (ExplosiveGrenade)Item.Create(ItemType.SCP018);
-                        ExplosionGrenadeProjectile activeGrenade3 = grenade3.SpawnActive(pl.Position);
-                        break;
-                }
-
-
+                ExplosiveGrenade grenade1 = (ExplosiveGrenade)Item.Create(ItemType.GrenadeHE);
+                ExplosionGrenadeProjectile activeGrenade1 = grenade1.SpawnActive(pl.Position);
             }
 
             
@@ -104,11 +89,21 @@ namespace RainbowRun
             if (RainbowRun.Instance.Config.SpawningPlayersEvent 
                 && Random.Range(0, 100) > RainbowRun.Instance.Config.SpawningPlayersProbability)
             {
-                var a = Player.List.Where(x => x.Role == RoleTypeId.Spectator)
-                    .ToList().RandomItem();
-                
-                a.Role.Set(RainbowRun.Instance.Config.RolesDisponibles[
-                    Random.Range(0,RainbowRun.Instance.Config.RolesDisponibles.Count)]);
+                var deadPlayers = Player.List.Where(x => x.Role == RoleTypeId.Spectator)
+                    .ToList();
+                if (deadPlayers.Count == 0 || deadPlayers == null)
+                {
+                    Log.Debug("No dead players found.");
+                }
+                else
+                {
+                    var playerSelected = deadPlayers.RandomItem();
+                    playerSelected.Role.Set(RainbowRun.Instance.Config.RolesDisponibles[
+                        Random.Range(0, RainbowRun.Instance.Config.RolesDisponibles.Count)]);
+                }
+
+
+
                 
                 
             }
