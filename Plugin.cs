@@ -8,7 +8,7 @@
     {
         public override string Name => "RainbowRun";
         public override string Author => "srsisco";
-        public override Version Version => new Version(1, 0, 0);
+        public override Version Version => new Version(1, 0, 4);
 
         public static RainbowRun Instance;
         public EventHandlers _handlers;

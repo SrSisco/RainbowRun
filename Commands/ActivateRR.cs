@@ -4,7 +4,7 @@ using Exiled.Permissions.Extensions;
 
 namespace RainbowRun.Commands
 {
-    [CommandHandler(typeof(ClientCommandHandler))]
+    [CommandHandler(typeof(RemoteAdminCommandHandler))]
     public class ActivateRR : ICommand
     {
         public string Command => "activateRR";
